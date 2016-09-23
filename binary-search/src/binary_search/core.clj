@@ -4,7 +4,7 @@
 (defn bsearch1
   [k list]
   (if (= (count list) 0)
-    (println "Element" k "is not present in list")
+    (println "Element" k "isn't present in list")
     (let [mid (/ (count list) 2)
           current (nth list mid)
           split-list (split-at mid list)
@@ -17,15 +17,17 @@
 (defn bsearch2
   [k list]
   (loop [new-list list]
-    (let [size (count new-list)
-          mid (/ size 2)
-          current (nth new-list mid)
-          split-list (split-at mid new-list)
-          left (first split-list)
-          right (last split-list)]
-      (cond (= k current) (println "Element" k "is present in list")
-            (< k current) (recur left)
-            :else (recur right)))))
+    (if (= (count new-list) 0)
+      (println "Element" k "isn't present in list")
+      (let [size (count new-list)
+            mid (/ size 2)
+            current (nth new-list mid)
+            split-list (split-at mid new-list)
+            left (first split-list)
+            right (last split-list)]
+        (cond (= k current) (println "Element" k "is present in list")
+              (< k current) (recur left)
+              :else (recur right))))))
 
 (defn -main
   [& args]
