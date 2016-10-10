@@ -20,7 +20,7 @@
 
 (defn -main
   [& args]
-  (let [m1 [[1 2 3] [4 5 6]]
-        m2 [[1 2] [3 4] [5 6]]
+  (let [m1 [[1 2] [3 4]]
+        m2 [[5 6] [7 8]]
         ]
     (println (matrix-mult m1 m2))))
