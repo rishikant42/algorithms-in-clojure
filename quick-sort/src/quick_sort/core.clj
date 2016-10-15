@@ -12,12 +12,20 @@
 ;;             (filter #(> % k) l))]
 ;;     (.indexOf t k)))
 
-(defn qsort [[pivot & xs]]
-  (when pivot
+(defn qsort1 [[pivot & xs]]
+  (if (not (nil? pivot))
     (let [smaller #(< % pivot)]
-      (lazy-cat (qsort (filter smaller xs))
-                [pivot]
-                (qsort (remove smaller xs))))))
+      (concat (qsort1 (filter smaller xs))
+              [pivot]
+              (qsort1 (remove smaller xs))))))
+
+(defn qsort2 [[pivot & xs]]
+  (when pivot  
+    (let [smaller #(< % pivot)]
+      (concat (qsort2 (filter smaller xs))
+              [pivot]
+              (qsort2 (remove smaller xs))))))
 (defn -main
   [& args]
-  (println (qsort '(3 8 6 4 7 5 0 2 1))))
+  (println (qsort1 '(3 8 6 4 7 5 0 2 1)))
+  (println (qsort2 '(3 8 6 4 7 5 0 2 1))))
