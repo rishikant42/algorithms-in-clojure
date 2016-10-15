@@ -25,7 +25,17 @@
       (concat (qsort2 (filter smaller xs))
               [pivot]
               (qsort2 (remove smaller xs))))))
+
+(defn qsort3 [[pivot & xs]]
+  (when pivot  
+    (let [smaller #(< % pivot)
+          greater #(> % pivot)]
+      (concat (qsort3 (filter smaller xs))
+              [pivot]
+              (qsort3 (filter greater xs))))))
+
 (defn -main
   [& args]
   (println (qsort1 '(3 8 6 4 7 5 0 2 1)))
-  (println (qsort2 '(3 8 6 4 7 5 0 2 1))))
+  (println (qsort2 '(3 8 6 4 7 5 0 2 1)))
+  (println (qsort3 '(3 8 6 4 7 5 0 2 1))))
